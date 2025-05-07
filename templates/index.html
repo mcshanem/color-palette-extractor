@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Color Palette Extractor</title>
+    <!-- Load Bootstrap-Flask CSS here -->
+    {{ bootstrap.load_css() }}
+    <!-- Load default CSS -->
+    <link href="{{ url_for('static', filename='css/default.css') }}" rel="stylesheet"/>
+</head>
+<body>
+<div class="d-flex flex-column vh-100 text-center">
+    {% if colors %}
+    <div class="m-auto">
+        <div class="container">
+            <div class="row justify-content-center">
+                {% for color in colors %}
+                <div class="col-3 d-flex justify-content-center">
+                    <div class="d-flex flex-column">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"
+                             fill="{{ color }}"
+                             class="bi bi-hexagon-fill p-3"
+                             viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  stroke="black"
+                                  stroke-width="0.25"
+                                  d="M8.5.134a1 1 0 0 0-1 0l-6 3.577a1 1 0 0 0-.5.866v6.846a1 1 0 0 0 .5.866l6 3.577a1 1 0 0 0 1 0l6-3.577a1 1 0 0 0 .5-.866V4.577a1 1 0 0 0-.5-.866z"/>
+                        </svg>
+                        <h3>{{ color }}</h3>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <h1 class="m-auto">Upload an image to see the most common colors.</h1>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" id="imgFileForm" class="m-auto">
+        <input class="form-control form-control-lg" name="img_file" type="file" onchange="imgFileForm.submit()">
+    </form>
+</div>
+
+<!-- Load Bootstrap-Flask JavaScript here -->
+{{ bootstrap.load_js() }}
+</body>
+</html>
